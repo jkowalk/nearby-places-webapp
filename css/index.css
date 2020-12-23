@@ -18,7 +18,7 @@ body {
     bottom: -3em;
     opacity: 0;
     width: 100%;
-    min-width: 20rem;
+    min-width: 21rem;
     background: #f0f0f0;
     border: 1px solid #e2e2e2;
     display: flex;
@@ -269,4 +269,8 @@ input:checked + .slider:before {
 #copyright {
     font-size: x-small;
     color: #767676;
+    position: fixed;
+    bottom: 0;
+    padding-bottom: 5px;
+    width: 100%;
 }
