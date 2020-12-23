@@ -45,7 +45,7 @@ function getLocation() {
 
 function checkDistance(coord) {
     var dist = distance(coord.coords.latitude, coord.coords.longitude, last_position.coords.latitude, last_position.coords.longitude, "M");
-    alert(dist);
+    //alert(dist);
     if (Math.abs(dist) >= 0.02) {
         triggerLocation();
         if (state===1) {
