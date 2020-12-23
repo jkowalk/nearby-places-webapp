@@ -45,8 +45,8 @@ function getLocation() {
 
 function checkDistance(coord) {
     var dist = distance(coord.coords.latitude, coord.coords.longitude, last_position.coords.latitude, last_position.coords.longitude, "M");
-    console.log(dist);
-    if (dist >= 10) {
+    alert(dist);
+    if (Math.abs(dist) >= 10) {
         triggerLocation();
         if (state===1) {
             get_summary(closest_place.title);
