@@ -13,10 +13,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <!-- async Seite weiterladen während Skript eingelesen wird!! -->
     <script src="js/index.js" async></script>
-    <title>Unofficial Wikipedia Summary Viewer</title>
+    <title>Nearby Places</title>
 </head>
-<body>
-<h1 id="header">Places Nearby</h1>
+<body onload="on_load()">
+<h1 id="header">Nearby Places</h1>
 <div id="description"></div>
 <p id="geoloc">
     <button id="btn_geoloc" onclick="triggerLocation()">Suche nach Orten in der Nähe</button>
@@ -28,6 +28,7 @@
 <section class="main">
     <div id="text">
         <p id="summary"></p>
+        <p id="link"></p>
     </div>
     <div id="img_wrapper">
         <img id="thumbnail" src=""/>
@@ -42,7 +43,7 @@
         <span class="slider round"></span>
         <p id="switch_text">Auto-Reload</p>
     </label>
-
+    <p id="copyright">Alle Daten und Bilder werden von der <br> &copy;Wikimedia Foundation Inc.<br> bereitgestellt.</p>
     <button id="reload" onclick="triggerReload()">Neu laden...</button>
 </div>
 </body>

@@ -225,6 +225,7 @@ input:checked + .slider:before {
     min-width: 10rem;
     max-width: 30rem;
     margin: auto;
+    font-size: large;
 }
 
 .main {
@@ -257,4 +258,15 @@ input:checked + .slider:before {
     width: 100%;
     height: 15rem;
     margin-top: 4rem;
+}
+
+#description {
+    margin-top: 0.5rem;
+    font-size: large;
+    color: #767676;
+}
+
+#copyright {
+    font-size: x-small;
+    color: #767676;
 }

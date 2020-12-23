@@ -6,7 +6,14 @@ var state = 0;
 var auto_r = false;
 var closest_place;
 
+function on_load() {
+    window.addEventListener('popstate', function(e) {
+        window.location.reload();
+    });
+}
+
 function triggerLocation() {
+    history.pushState(null, "", "index.html");
     if (state===0) {
         document.getElementById("header").textContent = "";
         document.getElementById("thumbnail").setAttribute("src", "");
@@ -39,7 +46,7 @@ function getLocation() {
 function checkDistance(coord) {
     var dist = distance(coord.coords.latitude, coord.coords.longitude, last_position.coords.latitude, last_position.coords.longitude, "M");
     console.log(dist);
-    if (dist >= 50) {
+    if (dist >= 20) {
         triggerLocation();
         if (state===1) {
             get_summary(closest_place.title);
@@ -192,6 +199,9 @@ async function show_summary(json) {
         document.getElementById("img_wrapper").style.visibility="hidden";
     }
     document.getElementById("summary").textContent=json.extract;
+    document.getElementById("link").innerHTML="<a target='_blank' href='https://de.wikipedia.org/wiki/" +
+        json.title.replace(" ", "_") +
+        "'>Zum Wikipedia Artikel...</a>";
     document.getElementById("description").textContent=json.description;
     document.getElementById("map").setAttribute("src", "https://maps.google.com/maps?q=" + json.coordinates.lat +
         ", " + json.coordinates.lon +
@@ -199,11 +209,13 @@ async function show_summary(json) {
 }
 
 function start_spin() {
+    document.getElementsByClassName("main")[0].style.visibility="hidden";
     document.getElementById("spin_wrapper").innerHTML = "<div id=\"spin\"></div>";
 }
 
 function stop_spin() {
     document.getElementById("spin_wrapper").innerHTML = "";
+    document.getElementsByClassName("main")[0].style.visibility="visible";
 }
 
 function auto_reload() {
