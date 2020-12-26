@@ -17,35 +17,41 @@
 </head>
 <body onload="on_load()">
 <h1 id="header">Nearby Places</h1>
-<div id="description"></div>
 <p id="geoloc">
-    <button id="btn_geoloc" onclick="triggerLocation()">Suche nach Orten in der Nähe</button>
+    <button id="btn_geoloc" onclick="start_button()">Suche nach Orten in der Nähe</button>
 </p>
-<p id="list">
-    Waiting for location...
-</p>
-<p id="p_geoloc"></p>
-<section class="main">
-    <div id="text">
-        <p id="summary"></p>
-        <p id="link"></p>
-    </div>
-    <div id="img_wrapper">
-        <img id="thumbnail" src=""/>
-    </div>
-</section>
-<iframe id="map" src="" frameborder='0' scrolling='no' marginheight='0' marginwidth='0'></iframe>
-<div id="spin_wrapper"></div>
-<br><br><br>
+<div id="p_geoloc"></div>
 
+<div id="list"></div>
+
+
+<div id="place">
+    <p id="description"></p>
+        <section id="main">
+        <div id="text">
+            <p id="summary"></p>
+            <p id="link"></p>
+        </div>
+        <div id="img_wrapper">
+            <img id="thumbnail" src=""/>
+        </div>
+    </section>
+    <iframe id="map" src="" frameborder='0' scrolling='no' marginheight='0' marginwidth='0'></iframe>
+</div>
+<br><br><br>
+<div id="spin_wrapper"></div>
+<div class="alert">
+    <span class="alert-close" data-close="alert" title="Close">&times;</span>
+    <strong>Auto-Reload</strong> - aktualisiert die Seite basierend auf ihrem Standort.
+</div>
 <div class="footer">
     <label class="switch">
         <input type="checkbox" onclick="auto_reload()" id="auto_reload">
         <span class="slider round"></span>
         <p id="switch_text">Auto-Reload</p>
     </label>
-    <button id="reload" onclick="triggerReload()">Neu laden...</button>
+    <button id="reload" onclick="refresh_back_button()">Neu laden</button>
 </div>
-<div id="copyright">Alle Daten und Bilder werden von der &copy;Wikimedia Foundation Inc. bereitgestellt.</div>
+<div id="copyright">Daten und Bilder sind von der &copy;Wikimedia Foundation Inc. bereitgestellt.</div>
 </body>
 </html>
