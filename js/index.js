@@ -26,6 +26,8 @@ for (var i = 0; i < close.length; i++) {
 /********  Input Control  *************/
 
 function start_button() {
+    auto_reload();
+    state = 0;
     history.pushState(null, "", "index.html");
     start_button_animation();
     get_location(function (pos) {
@@ -112,16 +114,6 @@ function auto_reload() {
         }, 5000);
     } else {
         window.clearInterval(auto);
-    }
-}
-
-function switch_state() {
-    switch (state) {
-        case 0:
-
-            break;
-        case 1:
-            break;
     }
 }
 
