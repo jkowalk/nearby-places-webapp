@@ -45,11 +45,12 @@ function refresh_back_button() {
         case 1:
             state = 0;
             document.getElementById("reload").innerText = "Neu laden";
+            document.getElementById("header").innerHTML = "Nearby Places";
             break;
     }
+    blank_screen();
     get_location(function (pos) {
         fetch_nearby_places_list(current_position, function () {
-            blank_screen();
             reset_show_list_animation();
             show_list();
             unveil_list();
@@ -71,7 +72,7 @@ function click_tile(title) {
 function auto_reload() {
     auto_r = document.getElementById("auto_reload").checked;
     if (auto_r) {
-        document.getElementsByClassName("alert")[0].style.display="block";
+        document.getElementById("reload_info").style.display="block";
         auto = window.setInterval(function () {
             get_location(function (pos) {
                 var dist = get_distance(current_position.lat, current_position.long, last_position.lat, last_position.long);
@@ -122,7 +123,7 @@ function auto_reload() {
 /***************  View  *********************/
 
 function blank_screen() {
-    geoloc_error.innerHTML = "";
+    document.getElementById("geo_error").style.display="none";
     document.getElementById("list").style.display = "none";
     document.getElementById("place").style.display = "none";
     start_spin();
@@ -199,7 +200,8 @@ function stop_spin() {
 function get_location(callback) {
     if (!navigator.geolocation) {
         console.log("Geolocation not supported");
-        geoloc_error.innerHTML = "Geolocation is not supported by this browser.";
+        geoloc_error.innerHTML = "Standort wird vom Browser nicht unterstützt";
+        document.getElementById("geo_error").style.display="block";
         current_position = null;
         callback(null);
     }
@@ -220,18 +222,19 @@ function showError(error) {
     console.log(error);
     switch (error.code) {
         case error.PERMISSION_DENIED:
-            geoloc_error.innerHTML = "User denied the request for Geolocation.";
+            geoloc_error.innerHTML = "Standortzugriff verweigert.";
             break;
         case error.POSITION_UNAVAILABLE:
-            geoloc_error.innerHTML = "Location information is unavailable.";
+            geoloc_error.innerHTML = "keine Standortinformation verfügbar.";
             break;
         case error.TIMEOUT:
-            geoloc_error.innerHTML = "The request to get user location timed out.";
+            geoloc_error.innerHTML = "Standort konnte nicht bestimmt werden.";
             break;
         case error.UNKNOWN_ERROR:
-            geoloc_error.innerHTML = "An unknown error occurred.";
+            geoloc_error.innerHTML = "unbekannter Fehler.";
             break;
     }
+    document.getElementById("geo_error").style.display="block";
 }
 
 function get_distance(lat1, lon1, lat2, lon2) {
@@ -297,6 +300,7 @@ function fetch_nearby_places_list(position, callback) {
         })
         .catch(function (error) {
             geoloc_error.innerHTML = "Irgendetwas ist schiefgelaufen :(, probier die Seite mal neu zu laden.";
+            document.getElementById("geo_error").style.display="block";
             console.log(error);
         });
 }
@@ -363,29 +367,3 @@ function parse_json_summary(data) {
 }
 
 /*************** End: Data Management  ************/
-
-
-
-
-function triggerLocation() {
-    history.pushState(null, "", "index.html");
-    if (state === 0) {
-        document.getElementById("header").textContent = "";
-        document.getElementById("thumbnail").setAttribute("src", "");
-        document.getElementById("summary").textContent = "";
-        document.getElementById("description").textContent = "";
-        document.getElementById("map").setAttribute("src", "");
-        document.getElementById("header").innerHTML = "Nearby Places";
-        document.getElementById("reload").textContent = "Neu laden...";
-        var list = document.getElementById("list");
-        list.style.animation = 'none';
-        list.offsetHeight; // trigger reflow
-        list.style.animation = null;
-        document.getElementById("geoloc").style.animationName = "slide_up";
-    }
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
-    } else {
-        geoloc_error.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}

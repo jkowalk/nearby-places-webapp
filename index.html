@@ -20,7 +20,11 @@
 <p id="geoloc">
     <button id="btn_geoloc" onclick="start_button()">Suche nach Orten in der Nähe</button>
 </p>
-<div id="p_geoloc"></div>
+<div class="alert" id="geo_error">
+    <span class="alert-close" data-close="alert" title="Close">&times;</span>
+    <strong>Standort Fehler</strong> - <div id="p_geoloc"></div>
+</div>
+
 
 <div id="list"></div>
 
@@ -40,7 +44,7 @@
 </div>
 <br><br><br>
 <div id="spin_wrapper"></div>
-<div class="alert">
+<div class="alert" id="reload_info">
     <span class="alert-close" data-close="alert" title="Close">&times;</span>
     <strong>Auto-Reload</strong> - aktualisiert die Seite basierend auf ihrem Standort.
 </div>

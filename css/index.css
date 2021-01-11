@@ -286,9 +286,7 @@ input:checked + .slider:before {
     transition: opacity 0.4s;
     max-width: 20em;
     position: fixed;
-    bottom: 5em;
-    left: 0;
-    display: none;
+    z-index: 90;
 }
 .alert-close {
     margin-left: 15px;
@@ -301,4 +299,17 @@ input:checked + .slider:before {
 }
 .alert-close:hover {
     color: #000;
+}
+
+#reload_info {
+    bottom: 5em;
+    left: 0;
+    display: none;
+}
+
+#geo_error {
+    margin: 40px auto;
+    left: 15px;
+    right: 15px;
+    display: none;
 }
