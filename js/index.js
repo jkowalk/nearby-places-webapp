@@ -76,7 +76,7 @@ function auto_reload() {
         auto = window.setInterval(function () {
             get_location(function (pos) {
                 var dist = get_distance(current_position.lat, current_position.long, last_position.lat, last_position.long);
-                if (dist < 0.3) {
+                if (dist < 0.05) {
                     switch (state) {
                         case 0:
                             for (let i = 0; i < nearby_places.length; i++) {
